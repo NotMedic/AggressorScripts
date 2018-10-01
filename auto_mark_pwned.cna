@@ -74,6 +74,15 @@ sub mark_owned {
 	sendhttp("POST", $bloodhoundurl, $body);
 }
 
+on beacon_initial {
+    if (-isadmin $1){
+		$computer = binfo($1, "computer");
+		$body = '{ "query" : "MATCH (n:Computer) WHERE n.name STARTS WITH \'' . $computer . '\' SET n.owned= TRUE RETURN n.name"}';
+        println("Marking " . $computer . " as owned");
+		sendhttp("POST", $bloodhoundurl, $body);
+    }
+}
+
 on heartbeat_1m {
 foreach $cred (credentials())
 	{
