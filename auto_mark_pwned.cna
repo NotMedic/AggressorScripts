@@ -69,17 +69,17 @@ sub sendhttp{
 }
 
 sub mark_owned {
-	$username = $1;
-	$body = '{ "query" : "MATCH (n:User) WHERE n.name STARTS WITH \'' . $username . '\' SET n.owned= TRUE RETURN n.name"}'; 
-	sendhttp("POST", $bloodhoundurl, $body);
+    $username = $1;
+    $body = '{ "query" : "MATCH (n:User) WHERE n.name STARTS WITH \'' . $username . '\' SET n.owned= TRUE RETURN n.name"}'; 
+    sendhttp("POST", $bloodhoundurl, $body);
 }
 
 on beacon_initial {
     if (-isadmin $1){
-		$computer = binfo($1, "computer");
-		$body = '{ "query" : "MATCH (n:Computer) WHERE n.name STARTS WITH \'' . $computer . '\' SET n.owned= TRUE RETURN n.name"}';
+        $computer = binfo($1, "computer");
+        $body = '{ "query" : "MATCH (n:Computer) WHERE n.name STARTS WITH \'' . $computer . '\' SET n.owned= TRUE RETURN n.name"}';
         println("Marking " . $computer . " as owned");
-		sendhttp("POST", $bloodhoundurl, $body);
+        sendhttp("POST", $bloodhoundurl, $body);
     }
 }
 
