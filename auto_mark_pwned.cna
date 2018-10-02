@@ -85,17 +85,17 @@ on beacon_initial {
 
 on heartbeat_1m {
 foreach $cred (credentials())
-	{
-		$username = uc("$cred['user']\@$cred['realm']") ;
-		if ( $username in @OwnedUsers )
-		    {
-	    	    #println("Skipping because we've already marked " . $username . " as owned");
-	    	}
-		else 
-			{	
-				println("Marking " . $username . " as owned");
-				mark_owned($username);
-				add(@OwnedUsers, $username);
-			}
-	}
+    {
+        $username = uc("$cred['user']\@$cred['realm']") ;
+        if ( $username in @OwnedUsers )
+             {
+                 #println("Skipping because we've already marked " . $username . " as owned");
+	     }
+        else 
+            {	
+                 println("Marking " . $username . " as owned");
+                 mark_owned($username);
+                 add(@OwnedUsers, $username);
+            }
+    }
 }
