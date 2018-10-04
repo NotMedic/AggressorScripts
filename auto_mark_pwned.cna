@@ -3,6 +3,13 @@
 # so it may mark more than necessary if you have overlapping REALMs in
 # your cred store. And yeah, it's possible to get Injection in neo4j 
 # since the username parameter isn't sanitized.
+#
+# Set these in your neo4j.conf
+#    dbms.connector.http.enabled=true
+#    dbms.connector.http.listen_address=:7474
+#   or https
+#    dbms.connector.https.enabled=true
+#    dbms.connector.https.listen_address=:7473
 # - @NotMedic
 #
 # sendhttp() code borrowed from @vysec and @Und3rf10w's prior work:
@@ -10,6 +17,12 @@
 #
 # Update the $bloodhoundurl to your bloodhound instance
 # Update the $authheader to your creds. "echo -n neo4j:bloodhound | base64"
+#
+# TODO:
+# 1. Parameterized query for neo4j
+# 2. Parse JSON response using vysec's json code:
+#     https://github.com/vysec/ANGRYPUPPY/tree/master/json
+# 3. Profit
 
 import java.net.URLEncoder;
 import java.io.BufferedReader;
